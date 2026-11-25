@@ -1,0 +1,30 @@
+# Fruit Studio UI
+
+> Four ordinary UI controls built from macro-photographed fruit resting on matte alabaster porcelain: a chop toggle, a five-berry stepper rail, a press-to-burst fig confirm pedestal, and a 3×2 six-fruit swatch matrix. Cleaving any fruit splits it in 3D with swipe-angle physics and blooms Beer-Lambert viscous nectar across the porcelain on the GPU; swiping upward launches cleaved fruit into hang-time for continuous multi-piece combos. Each control is one plain script that registers a custom element, with its WebGL2 engine, Web Audio foley and fruit WebP sprites inside it: no dependencies, no build step, no external fetches. MIT licensed.
+
+Live gallery: https://fruit-studio-ui.vercel.app
+Source: https://github.com/finktheartist/fruit-studio-ui
+
+## Drop-in controls
+
+Each is one plain script that registers a custom element. Load it with a script tag, not as a module. Do not rewrite or split the file: the WebGL2 nectar engine, Web Audio foley and fruit sprites are inside it as data. Each file carries a copy of the shared core; the first one loaded sets window.FruitStudio and the rest reuse it.
+
+- [Chop toggle](https://fruit-studio-ui.vercel.app/toggle/toggle.js): A binary switch whose thumb is a macro-photographed fruit resting in a matte alabaster track. Swipe through it to cleave the fruit in 3D, splash viscous nectar across the ceramic, and flip the switch; swipe upward to launch the halves into mid-air for continuous multi-piece combos. `<fruit-toggle>`: Use <fruit-toggle label="Ambient mode"></fruit-toggle>. Read el.checked and listen for change. Works in forms with a name. [Docs](https://github.com/finktheartist/fruit-studio-ui/blob/main/toggle/README.md)
+- [Berry stepper](https://fruit-studio-ui.vercel.app/stepper/stepper.js): A five-step segmented stepper rail holding five macro-photographed strawberries. Sweep across one to five berries in a single stroke to cleave them, reveal their glossy ruby hearts and splash crimson nectar across the porcelain; swipe upward to launch caps into mid-air combos. `<fruit-stepper>`: Use <fruit-stepper value="0" label="Intensity"></fruit-stepper>. Read el.value (0–5); it fires input while sweeping and change when the stroke ends. Works in forms with a name. [Docs](https://github.com/finktheartist/fruit-studio-ui/blob/main/stepper/README.md)
+- [Burst pedestal](https://fruit-studio-ui.vercel.app/button/button.js): A press-to-confirm pedestal cradling a macro-photographed Black Mission Fig. Hold for 0.66 seconds to compress the fig and fill its 360° wine-plum rim until it erupts in a radial hydraulic burst and lights a checkmark; or slash upward through the fig for mid-air combos. `<fruit-button>`: Use <fruit-button label="Confirm publish"></fruit-button>. Listen for confirm (and reset). el.confirmed reflects the state; el.burst() and el.reset() drive it from code. [Docs](https://github.com/finktheartist/fruit-studio-ui/blob/main/button/README.md)
+- [Swatch matrix](https://fruit-studio-ui.vercel.app/matrix/matrix.js): A 3×2 multi-select palette cradling all six photographed studio fruits (Blood Orange, Yuzu, Kiwi, Strawberry, Fig, Watermelon). Sweep through any combination in one continuous stroke to mix translucent nectar pigments on the GPU, tap any cleaved well to deselect it, or swipe upward for multi-color mid-air combos. `<fruit-matrix>`: Use <fruit-matrix name="flavors"></fruit-matrix>. Read el.selected (array of fruit keys) or el.value (comma-separated); listen for change. Works in forms with a name. [Docs](https://github.com/finktheartist/fruit-studio-ui/blob/main/matrix/README.md)
+
+Install any one with the shadcn CLI: `npx shadcn add finktheartist/fruit-studio-ui/NAME`, where NAME is toggle, stepper, button, matrix. The file lands in `public/fruit-studio-ui/`.
+
+Each scales cleanly to its CSS width at a 16:9 aspect ratio, renders viscous nectar with WebGL2 (falling back to 2D canvas without it), and is drawn for a warm light page (`#F1EAE0`). Sound plays after the first user gesture; `FruitStudio.Sound.on = false` silences them all.
+
+## The skill
+
+- [fruit-studio-ui skill](https://fruit-studio-ui.vercel.app/skills/fruit-studio-ui/SKILL.md): how the set was made and the rules it follows. Install with `npx skills add finktheartist/fruit-studio-ui`.
+- [core.js](https://fruit-studio-ui.vercel.app/skills/fruit-studio-ui/core.js): the shared core (WebGL2 viscous nectar optics, 3D spherical-cap fruit physics, Web Audio foley, FruitElement base).
+- [starter.html](https://fruit-studio-ui.vercel.app/skills/fruit-studio-ui/starter.html): the smallest whole example built on the core.
+- [look.mjs](https://fruit-studio-ui.vercel.app/skills/fruit-studio-ui/look.mjs): stops the clock, drives an interaction and saves frames side by side.
+
+## How it was made
+
+- [making-of/README.md](https://fruit-studio-ui.vercel.app/making-of/README.md): the material concept, why two controls were cut, and how the WebGL2 nectar and upward-combo physics came together.

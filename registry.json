@@ -1,0 +1,98 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "fruit-studio-ui",
+  "homepage": "https://fruit-studio-ui.vercel.app",
+  "items": [
+    {
+      "name": "toggle",
+      "type": "registry:file",
+      "title": "Fruit Studio Chop toggle",
+      "description": "A binary switch whose thumb is a macro-photographed fruit resting in a matte alabaster track. Swipe through it to cleave the fruit in 3D, splash viscous nectar across the ceramic, and flip the switch; swipe upward to launch the halves into mid-air for continuous multi-piece combos. One file of about 480 KB with its WebGL2 nectar engine, foley sound and fruit sprites inside it, no dependencies, defines <fruit-toggle>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "toggle",
+        "switch",
+        "fruit",
+        "webgl",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "toggle/toggle.js",
+          "type": "registry:file",
+          "target": "~/public/fruit-studio-ui/toggle.js"
+        }
+      ],
+      "docs": "Fruit Studio Chop toggle is a plain script that registers a custom element. Load /fruit-studio-ui/toggle.js with a script tag (not a module), then use <fruit-toggle label=\"Ambient mode\"></fruit-toggle>. Read el.checked and listen for change. Works in forms with a name. More: https://fruit-studio-ui.vercel.app"
+    },
+    {
+      "name": "stepper",
+      "type": "registry:file",
+      "title": "Fruit Studio Berry stepper",
+      "description": "A five-step segmented stepper rail holding five macro-photographed strawberries. Sweep across one to five berries in a single stroke to cleave them, reveal their glossy ruby hearts and splash crimson nectar across the porcelain; swipe upward to launch caps into mid-air combos. One file of about 210 KB with its WebGL2 nectar engine, foley sound and fruit sprites inside it, no dependencies, defines <fruit-stepper>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "stepper",
+        "slider",
+        "input",
+        "fruit",
+        "webgl",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "stepper/stepper.js",
+          "type": "registry:file",
+          "target": "~/public/fruit-studio-ui/stepper.js"
+        }
+      ],
+      "docs": "Fruit Studio Berry stepper is a plain script that registers a custom element. Load /fruit-studio-ui/stepper.js with a script tag (not a module), then use <fruit-stepper value=\"0\" label=\"Intensity\"></fruit-stepper>. Read el.value (0–5); it fires input while sweeping and change when the stroke ends. Works in forms with a name. More: https://fruit-studio-ui.vercel.app"
+    },
+    {
+      "name": "button",
+      "type": "registry:file",
+      "title": "Fruit Studio Burst pedestal",
+      "description": "A press-to-confirm pedestal cradling a macro-photographed Black Mission Fig. Hold for 0.66 seconds to compress the fig and fill its 360° wine-plum rim until it erupts in a radial hydraulic burst and lights a checkmark; or slash upward through the fig for mid-air combos. One file of about 220 KB with its WebGL2 nectar engine, foley sound and fruit sprites inside it, no dependencies, defines <fruit-button>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "button",
+        "confirm",
+        "hold",
+        "fruit",
+        "webgl",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "button/button.js",
+          "type": "registry:file",
+          "target": "~/public/fruit-studio-ui/button.js"
+        }
+      ],
+      "docs": "Fruit Studio Burst pedestal is a plain script that registers a custom element. Load /fruit-studio-ui/button.js with a script tag (not a module), then use <fruit-button label=\"Confirm publish\"></fruit-button>. Listen for confirm (and reset). el.confirmed reflects the state; el.burst() and el.reset() drive it from code. More: https://fruit-studio-ui.vercel.app"
+    },
+    {
+      "name": "matrix",
+      "type": "registry:file",
+      "title": "Fruit Studio Swatch matrix",
+      "description": "A 3×2 multi-select palette cradling all six photographed studio fruits (Blood Orange, Yuzu, Kiwi, Strawberry, Fig, Watermelon). Sweep through any combination in one continuous stroke to mix translucent nectar pigments on the GPU, tap any cleaved well to deselect it, or swipe upward for multi-color mid-air combos. One file of about 630 KB with its WebGL2 nectar engine, foley sound and fruit sprites inside it, no dependencies, defines <fruit-matrix>.",
+      "author": "Justin Finkelman <https://github.com/finktheartist>",
+      "categories": [
+        "checkbox",
+        "selection",
+        "palette",
+        "fruit",
+        "webgl",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "matrix/matrix.js",
+          "type": "registry:file",
+          "target": "~/public/fruit-studio-ui/matrix.js"
+        }
+      ],
+      "docs": "Fruit Studio Swatch matrix is a plain script that registers a custom element. Load /fruit-studio-ui/matrix.js with a script tag (not a module), then use <fruit-matrix name=\"flavors\"></fruit-matrix>. Read el.selected (array of fruit keys) or el.value (comma-separated); listen for change. Works in forms with a name. More: https://fruit-studio-ui.vercel.app"
+    }
+  ]
+}

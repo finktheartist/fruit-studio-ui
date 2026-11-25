@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fruit Studio Starter</title>
+<style>
+  html, body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #F1EAE0; font: 15px/1.45 system-ui, sans-serif; color: #1C1815; }
+  main { width: min(560px, 100vw - 32px); display: grid; gap: 12px; text-align: center; }
+  fruit-starter { width: 100%; border-radius: 22px; box-shadow: 0 18px 42px rgba(72, 54, 38, 0.09); }
+  p { margin: 0; color: rgba(28, 24, 21, 0.56); font-size: 13.5px; }
+</style>
+</head>
+<body>
+<main>
+  <fruit-starter id="el"></fruit-starter>
+  <p>Drag across the porcelain pad to splash viscous Blood Orange nectar on WebGL2.</p>
+</main>
+<script src="core.js"></script>
+<script>
+(() => {
+  const { FruitElement, StudioLiquidEngine, FRUITS, roundRectPath } = window.FruitStudio;
+
+  class StarterDemo {
+    constructor(mount, opts) {
+      this.width = opts.width || 640;
+      this.height = opts.height || 360;
+      this.engine = new StudioLiquidEngine(mount, opts);
+      this.wrap = this.engine.wrap;
+      this.scale = Math.min(this.width / 640, this.height / 360);
+      this.totalScore = 0;
+    }
+    clearSurface() { this.engine.clearCeramic(); }
+    pointerDown(x, y) { this.engine.beginStroke(x, y); }
+    pointerMove(x, y) {
+      const seg = this.engine.moveStroke(x, y);
+      if (seg && seg.speed > 260) {
+        this.engine.triggerMacroChop(seg.x2, seg.y2, seg.vx, seg.vy, FRUITS.bloodOrange, {
+          scale: this.scale * 0.65, speed: seg.speed,
+        });
+      }
+    }
+    pointerUp() { this.engine.endStroke(); }
+    step(dt) { this.engine.step(dt); }
+    render() {
+      const { uiCtx, ovCtx } = this.engine.beginFrame();
+      const s = this.scale, cx = this.width * 0.5, cy = this.height * 0.5;
+      uiCtx.save();
+      roundRectPath(uiCtx, cx - 120 * s, cy - 48 * s, 240 * s, 96 * s, 48 * s);
+      uiCtx.fillStyle = '#F7F3EC';
+      uiCtx.shadowColor = 'rgba(72,54,38,0.14)';
+      uiCtx.shadowBlur = 18 * s;
+      uiCtx.shadowOffsetY = 8 * s;
+      uiCtx.fill();
+      uiCtx.shadowColor = 'transparent';
+      uiCtx.strokeStyle = 'rgba(28,24,21,0.08)';
+      uiCtx.lineWidth = 1.5 * s;
+      uiCtx.stroke();
+      uiCtx.fillStyle = 'rgba(28,24,21,0.45)';
+      uiCtx.font = `600 ${13 * s}px system-ui, sans-serif`;
+      uiCtx.textAlign = 'center';
+      uiCtx.textBaseline = 'middle';
+      uiCtx.fillText('SWIPE PORCELAIN', cx, cy);
+      uiCtx.restore();
+      this.engine.drawSlashTrail(ovCtx);
+      this.engine.endFrame();
+    }
+  }
+
+  class FruitStarterElement extends FruitElement {
+    _createDemo(mount, opts) { return new StarterDemo(mount, opts); }
+    _syncFromAttrs() { this.setAttribute('role', 'region'); this.setAttribute('aria-label', 'Porcelain starter pad'); }
+  }
+  customElements.define('fruit-starter', FruitStarterElement);
+})();
+</script>
+</body>
+</html>

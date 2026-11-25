@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fruit Studio Burst pedestal</title>
+<link rel="icon" href="data:,">
+<style>
+  :root { --page: #F1EAE0; --card: #F6F1EA; --ink: #1C1815; --mute: rgba(28, 24, 21, 0.54); --line: rgba(92, 74, 56, 0.14); }
+  html { overflow-x: clip; background: var(--page); }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; color: var(--ink); font: 15px/1.45 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  main { width: min(600px, 100vw - 28px); padding: 36px 0 52px; text-align: center; }
+  h1 { margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -.02em; }
+  .sub { margin: 4px 0 0; color: var(--mute); }
+  .stage { display: grid; justify-items: center; gap: 12px; padding: 22px 0 16px; }
+  .stage > :is(fruit-toggle, fruit-stepper, fruit-button, fruit-matrix) { width: 100%; border-radius: 22px; box-shadow: 0 18px 42px rgba(72, 54, 38, 0.09); border: 1px solid var(--line); }
+  .field { width: 100%; display: flex; justify-content: space-between; font-weight: 500; font-size: 14px; }
+  .field output { color: var(--mute); font-variant-numeric: tabular-nums; }
+  .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .hint { margin: 0 4px; color: var(--mute); font-size: 13.5px; line-height: 1.45; }
+  .back { margin-top: 14px; }
+  .pill { font: inherit; font-size: 13.5px; padding: 6px 15px; border-radius: 999px; border: 1px solid rgba(28, 24, 21, 0.14); background: rgba(255, 253, 250, 0.88); color: inherit; cursor: pointer; }
+  .pill:hover { background: #FFFFFF; }
+  .pill.on { background: #1C1815; border-color: #1C1815; color: #FAF7F2; }
+  a { color: inherit; } :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  code { font: 12.5px ui-monospace, monospace; padding: 1px 5px; border-radius: 5px; background: var(--card); border: 1px solid var(--line); }
+  .embed body { place-items: start center; min-height: 0; }
+  .embed h1, .embed .sub, .embed .hint, .embed .back, .embed .field, .embed .row { display: none; }
+  .embed main { width: 100%; max-width: 640px; padding: 0; }
+  .embed .stage { padding: 0; }
+  .embed .stage > :is(fruit-toggle, fruit-stepper, fruit-button, fruit-matrix) { border-radius: 0; border: 0; box-shadow: none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Burst pedestal</h1>
+  <p class="sub">Press and hold a Black Mission Fig to confirm. <code>&lt;fruit-button&gt;</code></p>
+  <div class="stage">
+    <div class="field"><span class="lab">Confirm action</span><output id="out"></output></div>
+    <fruit-button id="el" label="Confirm action"></fruit-button>
+    <div class="row"><button class="pill" type="button" id="reset">Fresh fig</button><button class="pill" type="button" id="clear">Clear ceramic</button></div>
+  </div>
+  <p class="hint">Press and hold the fig for 0.66 s to trigger the 360° hydraulic burst, or swipe UP across it for mid-air combos.</p>
+  <p class="hint back"><button class="pill on" type="button" id="snd">Sound on</button> · <a href="../gallery/">All four</a> · <a href="https://github.com/finktheartist/fruit-studio-ui/blob/main/button/README.md">Docs</a></p>
+</main>
+<script src="button.js"></script>
+<script>
+// This page's own wiring. The control is all in button.js.
+// ?embed=1 hides the heading and the hint.
+const Q = new URLSearchParams(location.search), el = document.getElementById('el');
+if (Q.get('embed') === '1') document.documentElement.classList.add('embed');
+const snd = document.getElementById('snd');
+snd.onclick = () => {
+  FruitStudio.Sound.wake();
+  const on = FruitStudio.Sound.toggle();
+  snd.textContent = on ? 'Sound on' : 'Sound off';
+  snd.classList.toggle('on', on);
+};
+const out = document.getElementById('out'); const show = () => out.textContent = el.confirmed ? 'Confirmed ✓' : 'Poised'; el.addEventListener('confirm', show); el.addEventListener('reset', show); show(); document.getElementById('reset').onclick = () => el.reset(); document.getElementById('clear').onclick = () => el.clear();
+</script>
+</body>
+</html>
